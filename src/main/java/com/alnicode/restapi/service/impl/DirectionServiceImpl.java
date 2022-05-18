@@ -23,26 +23,33 @@ public class DirectionServiceImpl extends DeleteService<Direction> implements ID
 
     @Override
     protected CrudRepository<Direction, Long> repository() {
-        return null;
+        return repository;
     }
 
     @Override
     public DirectionResponse create(DirectionRequest directionRequest) {
-        return null;
+        return mapper.toResponse(repository.save(mapper.toEntity(directionRequest)));
     }
 
     @Override
     public List<DirectionResponse> getAll() {
-        return null;
+        return mapper.toResponses(repository.findAll());
     }
 
     @Override
     public Optional<DirectionResponse> get(long id) {
-        return Optional.empty();
+        return repository.findById(id).map(mapper::toResponse);
     }
 
     @Override
     public Optional<DirectionResponse> update(long id, DirectionRequest directionRequest) {
-        return Optional.empty();
+        if (!repository.existsById(id)) {
+            return Optional.empty();
+        }
+
+        final var entity = mapper.toEntity(directionRequest);
+        entity.setId(id);
+
+        return Optional.of(mapper.toResponse(repository.save(entity)));
     }
 }
