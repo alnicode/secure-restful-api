@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface IPersonMapper {
-    @Mapping(target = "address", ignore = true)
+    @Mapping(target = "address", expression = "java(entity.getDirection().getFullAddress())")
     PersonResponse toResponse(Person entity);
     List<PersonResponse> toResponses(List<Person> entities);
 
