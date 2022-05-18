@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface iDirectionMapper {
+public interface IDirectionMapper {
     @Mapping(target = "owner", source = "person.name")
     DirectionResponse toResponse(Direction entity);
     List<DirectionResponse> toResponses(List<Direction> entities);
