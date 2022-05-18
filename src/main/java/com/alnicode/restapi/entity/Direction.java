@@ -42,4 +42,8 @@ public class Direction {
     @OneToOne(mappedBy = "direction", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE })
     private Person person;
+
+    public String getFullAddress() {
+        return country + ", " + state + ", " + locality + ", " + address + ".";
+    }
 }
